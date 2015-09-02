@@ -1,0 +1,87 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<style>
+
+		*{padding:0;margin:0;}
+		.lottery{ border-collapse: collapse;}
+		.lottery td{position:relative;border: 0;width:120px;height: 120px;}
+		.lottery .lot-item{background:url(images/lottery.png) no-repeat;width:120px;width:120px;}
+		.lottery .img1{background-position: 0 0;}
+		.lottery .img2{background-position: -120px 0;}
+		.lottery .img3{background-position: -240px 0;}
+		.lottery .img4{background-position: -360px 0;}
+		.lottery .img5{background-position: 0 -120px;}
+		.lottery .img6{background-position: -360px -120px;}
+		.lottery .img7{background-position: 0 -240px;}
+		.lottery .img8{background-position: -360px -240px;}
+		.lottery .img9{background-position: 0 -360px;}
+		.lottery .img10{background-position: -120px -360px;}
+		.lottery .img11{background-position: -240px -360px;}
+		.lottery .img12{background-position: -360px -360px;}
+		.lottery img{vertical-align: top;}
+		.lottery .start{text-align: center;background: url(images/lottery.png) no-repeat -120px -120px;width: 240px;height: 240px;}
+		.lottery .start img{position:absolute;left:50%;top:50%;margin-left:-65px;margin-top:-58px;cursor: pointer;}
+		.lottery .shadow{display:block;height: 100%;width:100%;position: absolute;top:0;left:0;background-color: #000;opacity: .3;filter:alpha(opacity=50);}
+		.lottery.init .shadow{display: none;}
+		.lottery .cur .shadow{display: none;}
+	</style>
+</head>
+<body>
+	<table class="lottery init">
+		<tr>
+			<td class="lot-item img1">
+			</td>
+			<td class="lot-item img2">
+			</td>
+			<td class="lot-item img3">
+			</td>
+			<td class="lot-item img4">
+			</td>
+		</tr>
+		<tr>
+			<td class="lot-item img5">
+			</td>
+			<td class="start" colspan=2 rowspan=2>
+				<img src="images/start.png">
+			</td>
+			<td class="lot-item img6">
+			</td>
+		</tr>
+		<tr>
+			<td class="lot-item img7">
+			</td>
+			<td class="lot-item img8">
+			</td>
+		</tr>
+		<tr>
+			<td class="lot-item img9">
+			</td>
+			<td class="lot-item img10">
+			</td>
+			<td class="lot-item img11">
+			</td>
+			<td class="lot-item img12">
+			</td>
+		</tr>
+	</table>
+</body>
+<script src="js/jquery-1.8.3.min.js"></script>
+<script src="js/lottery.js"></script>
+<script>
+	var lot = new Lottery(".lottery",{
+		onStop:function(){
+			$(".start img").removeAttr("wait");
+		}
+	})
+	$(".start img").on("click",function(){
+		if(!$(this).attr("wait")){
+			lot.start();
+			setTimeout(function(){lot.stop(Math.ceil(Math.random()*11)+1)},3000)
+		}
+		$(this).attr("wait",true);
+	})
+</script>
+</html>
